@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landstead | Homesteader Land Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-badge">🌱</span>
+        <div>
+          <h1>Landstead</h1>
+          <p>Homesteader-first land search intelligence</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <input id="searchInput" type="search" placeholder="Search by county, parcel #, or state" />
+        <button id="resetBtn" type="button" class="secondary">Reset</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="panel filters">
+        <h2>Filter Properties</h2>
+        <div class="field">
+          <label for="minAcres">Minimum acres</label>
+          <input id="minAcres" type="number" min="0" step="1" />
+        </div>
+        <div class="field">
+          <label for="maxPrice">Max price ($)</label>
+          <input id="maxPrice" type="number" min="0" step="1000" />
+        </div>
+        <div class="field">
+          <label for="maxSlope">Max average slope (°)</label>
+          <input id="maxSlope" type="number" min="0" max="45" step="0.1" />
+        </div>
+        <div class="field">
+          <label for="waterRightsOnly">Water rights</label>
+          <select id="waterRightsOnly">
+            <option value="any">Any</option>
+            <option value="yes">Required</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="wellOnly">Well</label>
+          <select id="wellOnly">
+            <option value="any">Any</option>
+            <option value="yes">Required</option>
+          </select>
+        </div>
+
+        <button id="applyFiltersBtn" type="button">Apply Filters</button>
+
+        <h3>Add / Update Property Data</h3>
+        <form id="propertyForm">
+          <div class="field"><label>Title</label><input name="title" required /></div>
+          <div class="field"><label>State</label><input name="state" required /></div>
+          <div class="field"><label>County / Region</label><input name="region" required /></div>
+          <div class="field"><label>Price ($)</label><input name="price" type="number" min="0" required /></div>
+          <div class="field"><label>Acres</label><input name="acres" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Parcel #</label><input name="parcel" required /></div>
+          <div class="field"><label>Avg slope (°)</label><input name="avgSlope" type="number" min="0" max="45" step="0.1" required /></div>
+          <div class="field"><label>% under 10°</label><input name="slopeUnder10" type="number" min="0" max="100" step="0.1" required /></div>
+          <div class="field"><label>Water source</label><input name="waterSource" placeholder="Spring, creek, hauled, etc." required /></div>
+          <div class="field"><label>Power source</label><input name="powerSource" placeholder="Grid, solar, hybrid, none" required /></div>
+          <div class="field checkbox"><label><input name="well" type="checkbox" /> Existing well</label></div>
+          <div class="field checkbox"><label><input name="septic" type="checkbox" /> Existing septic</label></div>
+          <div class="field checkbox"><label><input name="waterRights" type="checkbox" /> Water rights included</label></div>
+          <div class="field"><label>Annual rainfall (inches)</label><input name="rainfall" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Distance to Costco (mi)</label><input name="distCostco" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Distance to hospital (mi)</label><input name="distHospital" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Distance to town (mi)</label><input name="distTown" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Distance to hardware store (mi)</label><input name="distHardware" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Distance to airport (mi)</label><input name="distAirport" type="number" min="0" step="0.1" required /></div>
+          <div class="field"><label>Geology notes</label><textarea name="geology" rows="3" required></textarea></div>
+          <div class="field"><label>Tax history</label><textarea name="taxHistory" rows="3" placeholder="2025: $1,250; 2024: $1,180" required></textarea></div>
+          <button type="submit">Save Property</button>
+        </form>
+      </aside>
+
+      <section class="content">
+        <section class="panel list-panel">
+          <div class="list-heading">
+            <h2>Listings</h2>
+            <p id="resultsCount"></p>
+          </div>
+          <div id="listingGrid" class="listing-grid"></div>
+        </section>
+
+        <section class="panel details-panel" id="detailsPanel">
+          <h2>Property Details</h2>
+          <p>Select a listing to view homestead viability metrics.</p>
+        </section>
+      </section>
+    </main>
+
+    <template id="listingCardTemplate">
+      <article class="listing-card">
+        <h3 class="listing-title"></h3>
+        <p class="location"></p>
+        <div class="pill-row">
+          <span class="pill acres"></span>
+          <span class="pill price"></span>
+          <span class="pill score"></span>
+        </div>
+        <p class="parcel"></p>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
