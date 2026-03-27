@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homestead Finder | Zillow for Land</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark">HF</span>
+          <div>
+            <p>Homestead Finder</p>
+            <span>Zillow-style land intelligence</span>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#marketplace">Marketplace</a>
+          <a href="#scoring">Scoring</a>
+          <a href="#services">Local resources</a>
+          <a href="#roadmap">Roadmap</a>
+        </div>
+      </nav>
+
+      <div class="hero-content">
+        <div class="hero-copy">
+          <span class="eyebrow">Built for off-grid & rural buyers</span>
+          <h1>Find land you can actually live on, build on, and thrive on.</h1>
+          <p>
+            A land-first marketplace that combines parcel data, slope/buildability analysis,
+            utilities, climate, tax history, zoning, and nearby essential services into one
+            buyer-friendly experience.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#marketplace">Explore concept</a>
+            <a class="button secondary" href="#platform-pillars">See platform pillars</a>
+          </div>
+          <ul class="hero-stats">
+            <li><strong>36+</strong><span>data points per parcel</span></li>
+            <li><strong>4</strong><span>buyer personas supported</span></li>
+            <li><strong>1</strong><span>homestead readiness score</span></li>
+          </ul>
+        </div>
+
+        <section class="search-panel">
+          <div class="panel-header">
+            <p class="panel-kicker">Prototype parcel search</p>
+            <h2>Rank listings by self-sufficiency potential</h2>
+          </div>
+
+          <div class="filters-grid">
+            <label>
+              Budget
+              <select id="budgetFilter">
+                <option value="all">Any price</option>
+                <option value="150000">Up to $150k</option>
+                <option value="250000">Up to $250k</option>
+                <option value="400000">Up to $400k</option>
+              </select>
+            </label>
+            <label>
+              Acreage
+              <select id="acreageFilter">
+                <option value="all">Any size</option>
+                <option value="10">10+ acres</option>
+                <option value="20">20+ acres</option>
+                <option value="40">40+ acres</option>
+              </select>
+            </label>
+            <label>
+              Water source
+              <select id="waterFilter">
+                <option value="all">Any setup</option>
+                <option value="true">Existing source only</option>
+              </select>
+            </label>
+            <label>
+              Buildability
+              <select id="buildabilityFilter">
+                <option value="all">Any terrain</option>
+                <option value="50">50%+ under 10°</option>
+                <option value="70">70%+ under 10°</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="chip-row">
+            <button class="chip active" data-persona="all">Balanced</button>
+            <button class="chip" data-persona="off-grid">Off-grid</button>
+            <button class="chip" data-persona="family">Family ready</button>
+            <button class="chip" data-persona="farm">Food production</button>
+          </div>
+
+          <div class="score-card">
+            <p>Top match</p>
+            <h3 id="topMatchName">Juniper Ridge Retreat</h3>
+            <div class="score-ring">
+              <span id="topMatchScore">91</span>
+            </div>
+            <ul id="topMatchHighlights"></ul>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="platform-pillars">
+        <div class="section-heading">
+          <span class="eyebrow">Platform pillars</span>
+          <h2>Everything a land buyer needs before making the leap.</h2>
+          <p>
+            The concept combines listing discovery, parcel intelligence, local service referrals,
+            and a practical readiness score for people leaving city life behind.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <article class="pillar-card">
+            <h3>Land intelligence</h3>
+            <p>
+              Water, septic viability, power access, buildable percentage, grading needs,
+              average slope, parcel number, zoning, and tax history presented in plain English.
+            </p>
+          </article>
+          <article class="pillar-card">
+            <h3>Homesteading viability</h3>
+            <p>
+              Monthly weather summaries, rainfall, wind severity, and climate suitability for
+              gardening, livestock, and seasonal access.
+            </p>
+          </article>
+          <article class="pillar-card">
+            <h3>Rural convenience</h3>
+            <p>
+              Distances to the nearest city, hardware store, Costco, hospital, and emergency
+              response corridor so buyers can balance privacy with practicality.
+            </p>
+          </article>
+          <article class="pillar-card">
+            <h3>Local resource marketplace</h3>
+            <p>
+              Connect prospects with trusted well drillers, solar installers, builders, septic
+              experts, fencing crews, and site prep contractors near each parcel.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section alt" id="marketplace">
+        <div class="section-heading inline">
+          <div>
+            <span class="eyebrow">Example listing experience</span>
+            <h2>Featured parcels ranked by your goals</h2>
+          </div>
+          <p>
+            This prototype shows how listings can surface homestead readiness instead of just
+            acreage and price.
+          </p>
+        </div>
+
+        <div class="listing-grid" id="listingGrid"></div>
+      </section>
+
+      <section class="section" id="scoring">
+        <div class="section-heading inline">
+          <div>
+            <span class="eyebrow">Buyer decision support</span>
+            <h2>Homestead readiness score</h2>
+          </div>
+          <p>
+            A transparent weighted model helps buyers compare rural properties beyond generic real
+            estate filters.
+          </p>
+        </div>
+
+        <div class="scoring-layout">
+          <article class="score-breakdown">
+            <h3>Core score categories</h3>
+            <div id="scoreBars"></div>
+          </article>
+
+          <article class="data-dictionary">
+            <h3>Recommended parcel fields</h3>
+            <ul>
+              <li>Parcel number and county records link</li>
+              <li>Water source status and well depth nearby</li>
+              <li>Septic suitability / perc test status</li>
+              <li>Utility access and estimated hookup distance</li>
+              <li>Percent buildable under slope thresholds</li>
+              <li>Average slope and cut/fill leveling estimate</li>
+              <li>Zoning, overlays, setbacks, and permitted uses</li>
+              <li>Tax history, annual carrying costs, and exemptions</li>
+              <li>Distance to city, hospital, hardware, groceries, Costco</li>
+              <li>Rainfall, temperature bands, wind, growing season</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section alt" id="services">
+        <div class="section-heading inline">
+          <div>
+            <span class="eyebrow">Trusted local network</span>
+            <h2>Pair every property with vetted rural service providers</h2>
+          </div>
+          <p>
+            Turn a listing portal into an execution platform by helping buyers estimate and source
+            the work required to develop raw land.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <h3>Site setup</h3>
+            <p>Excavation, grading, driveway access, retaining work, fencing, and pads.</p>
+          </article>
+          <article class="service-card">
+            <h3>Utilities & water</h3>
+            <p>Well drilling, water storage, solar, generators, batteries, septic, propane.</p>
+          </article>
+          <article class="service-card">
+            <h3>Structures</h3>
+            <p>Cabins, barndominiums, frame builders, greenhouses, barns, sheds, and workshops.</p>
+          </article>
+          <article class="service-card">
+            <h3>Land use support</h3>
+            <p>Surveyors, soil testing, permaculture designers, animal enclosures, and feed suppliers.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="roadmap">
+        <div class="section-heading">
+          <span class="eyebrow">Product roadmap</span>
+          <h2>How to evolve this into a real platform</h2>
+        </div>
+
+        <div class="roadmap-grid">
+          <article>
+            <span>Phase 1</span>
+            <h3>Land-focused discovery MVP</h3>
+            <p>Create listing pages, scoring, saved searches, and county/zoning enrichment.</p>
+          </article>
+          <article>
+            <span>Phase 2</span>
+            <h3>Parcel intelligence engine</h3>
+            <p>Ingest slope rasters, climate normals, tax data, utility overlays, and service maps.</p>
+          </article>
+          <article>
+            <span>Phase 3</span>
+            <h3>Local service marketplace</h3>
+            <p>Enable quote requests, build-cost estimation, provider profiles, and reviews.</p>
+          </article>
+          <article>
+            <span>Phase 4</span>
+            <h3>Move-to-land planning tools</h3>
+            <p>Add financing guidance, development checklists, and self-sufficiency planning dashboards.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Homestead Finder concept • Designed for secluded, off-grid, and semi-off-grid land buyers.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
